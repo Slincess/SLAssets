@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1025" d:DesignHeight="668"
+        x:Class="AssetFinder.MainWindow"
+		Background="#121212"
+        Title="AssetFinder">
+	    
+	
+
+	<Grid>
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Spacing="20">
+
+			<ScrollViewer>
+				<StackPanel x:Name="AssetFiles" HorizontalAlignment="Left" VerticalAlignment="Top" />
+				
+			</ScrollViewer>
+			
+			<!-- Title -->
+			<TextBlock Text="SL Assets"
+                       FontSize="32"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+
+			<!-- Search Bar -->
+			<TextBox Watermark="what do you need?"
+                     Background="#1E1E1E"
+                     Foreground="White"
+                     FontSize="14"
+                     BorderBrush="#2A2A2A"
+                     BorderThickness="1"
+                     Height="40"
+                     Padding="10"
+                     HorizontalAlignment="Stretch"
+					 KeyDown="UserSearching"
+					 />
+
+			<!-- Buttons -->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+				<Button 
+					Content="Add assets"
+                    Background="#1E1E1E"
+                    Foreground="White"
+                    FontSize="14"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="1"
+                    Width="168"
+                    Height="45"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					Click="AddAsset_Clicked"
+				    />
+				<Button 
+					Content="See folder"
+                    Background="#1E1E1E"
+                    Foreground="White"
+                    FontSize="14"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="1"
+                    Width="168"
+                    Height="45"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					Click="seeAsset_Clicked"
+					/>
+
+				
+			</StackPanel>
+		</StackPanel>
+	</Grid>
+
+</Window>
