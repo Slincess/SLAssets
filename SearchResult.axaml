@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1025" d:DesignHeight="668"
+			 Background="#121212"
+             x:Class="AssetFinder.SearchResult">
+	<Grid>
+		<StackPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Width="600" Spacing="40">
+			<ScrollViewer>
+				<StackPanel x:Name="AssetFiles" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+			</ScrollViewer>
+
+			<!-- Search Bar -->
+			<TextBox Watermark="what do you need?"
+					 Background="#1E1E1E"
+					 Foreground="White"
+					 FontSize="14"
+					 BorderBrush="#2A2A2A"
+					 BorderThickness="1"
+					 Height="40"
+					 Padding="10"
+					 HorizontalAlignment="Stretch"
+				 
+					 />
+			
+		</StackPanel>
+	</Grid>
+</UserControl>

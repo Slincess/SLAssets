@@ -1466,11 +1466,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kisac\\source\\repos\\AssetFinder\\AssetFinder.csproj",
+      "projectUniqueName": "C:\\Users\\kisac\\source\\repos\\SLAssets\\AssetFinder.csproj",
       "projectName": "AssetFinder",
-      "projectPath": "C:\\Users\\kisac\\source\\repos\\AssetFinder\\AssetFinder.csproj",
+      "projectPath": "C:\\Users\\kisac\\source\\repos\\SLAssets\\AssetFinder.csproj",
       "packagesPath": "C:\\Users\\kisac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kisac\\source\\repos\\AssetFinder\\obj\\",
+      "outputPath": "C:\\Users\\kisac\\source\\repos\\SLAssets\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -2,13 +2,14 @@ using Avalonia.Controls;
 using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
-using System.Formats.Asn1;
 using System.IO;
+using Avalonia.Input;
 namespace AssetFinder
 {
     public partial class MainWindow : Window
     {
-        private List<string> Assets = new List<string>();
+        private List<Asset> Assets = new List<Asset>();
+        public List<Asset> SearchResult = new List<Asset>();
 
         public MainWindow()
         {
@@ -50,18 +51,47 @@ namespace AssetFinder
             };
 #pragma warning restore CS0618 // Typ oder Element ist veraltet
 
-            string? result = await dialog.ShowAsync(this);
+            string? resultString = await dialog.ShowAsync(this);
 
-            if (result != null && result.Length > 0)
+            if (resultString != null && resultString.Length > 0)
             {
-                string filePath = result;
-                Assets.AddRange(Directory.GetFiles(result, "*", SearchOption.AllDirectories));
+                string filePath = resultString;
+                string[] result = Directory.GetFiles(filePath,"*",SearchOption.AllDirectories);
+                foreach (var item in result)
+                {
+                    Asset asset = new Asset();
+                    asset.File_Name = Path.GetFileName(item.ToString());
+                    asset.File_Path = Path.GetFullPath(item.ToString());
+
+                    Assets.Add(asset);
+                }
             }
         }
 
         private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e)
         {
-            //List
+            if(e.Key == Key.Enter && sender != null)
+            {
+
+                var textBox = sender as TextBox;
+                string Search = textBox.Text;
+                if (!string.IsNullOrWhiteSpace(Search))
+                {
+                    SearchResult.Clear();
+                    var found = Assets.FindAll(asset => asset.File_Name.Contains(Search, StringComparison.OrdinalIgnoreCase));
+                    SearchResult.AddRange(found);
+
+                    MainPanel.VerticalAlignment = Avalonia.Layout.VerticalAlignment.Top;
+
+                    var List = this.FindControl<StackPanel>("AssetFiles");
+                    List.Children.Clear();
+                    foreach (var item in SearchResult)
+                    {
+                        List.Children.Add(new TextBlock { Text = $"{item.File_Name}" });
+                    }
+                }
+
+            }
         }
     }
 }

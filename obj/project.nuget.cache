@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xaufQlxGC/U=",
+  "dgSpecHash": "lUgONKFagt4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kisac\\source\\repos\\AssetFinder\\AssetFinder.csproj",
+  "projectFilePath": "C:\\Users\\kisac\\source\\repos\\SLAssets\\AssetFinder.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kisac\\.nuget\\packages\\avalonia\\11.3.2\\avalonia.11.3.2.nupkg.sha512",
     "C:\\Users\\kisac\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",

@@ -10,18 +10,15 @@
 	
 
 	<Grid>
-		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Spacing="20">
+		<StackPanel Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Spacing="20">
 
-			<ScrollViewer>
-				<StackPanel x:Name="AssetFiles" HorizontalAlignment="Left" VerticalAlignment="Top" />
-				
-			</ScrollViewer>
 			
 			<!-- Title -->
 			<TextBlock Text="SL Assets"
                        FontSize="32"
                        HorizontalAlignment="Center"
-                       Foreground="White"/>
+                       Foreground="White"
+					   Name="Title"/>
 
 			<!-- Search Bar -->
 			<TextBox Watermark="what do you need?"
@@ -34,6 +31,8 @@
                      Padding="10"
                      HorizontalAlignment="Stretch"
 					 KeyDown="UserSearching"
+					 Name="SearchBar"
+					 
 					 />
 
 			<!-- Buttons -->
@@ -67,7 +66,12 @@
 
 				
 			</StackPanel>
+			<ContentControl Name="Result" />
 		</StackPanel>
-	</Grid>
+		
+		<ScrollViewer VerticalAlignment="Center">
+			<StackPanel x:Name="AssetFiles" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
+		</ScrollViewer>
+	</Grid>
 </Window>
