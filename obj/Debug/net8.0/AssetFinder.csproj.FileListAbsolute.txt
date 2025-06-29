@@ -148,3 +148,4 @@ C:\Users\kisac\source\repos\SLAssets\obj\Debug\net8.0\refint\AssetFinder.dll
 C:\Users\kisac\source\repos\SLAssets\obj\Debug\net8.0\AssetFinder.pdb
 C:\Users\kisac\source\repos\SLAssets\obj\Debug\net8.0\AssetFinder.genruntimeconfig.cache
 C:\Users\kisac\source\repos\SLAssets\obj\Debug\net8.0\ref\AssetFinder.dll
+C:\Users\kisac\source\repos\SLAssets\obj\Debug\net8.0\AssetFinder.sourcelink.json

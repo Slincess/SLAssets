@@ -9,7 +9,7 @@
 		<StackPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Width="600" Spacing="40">
 			<ScrollViewer>
 				<StackPanel x:Name="AssetFiles" HorizontalAlignment="Left" VerticalAlignment="Top" />
-
+				
 			</ScrollViewer>
 
 			<!-- Search Bar -->
@@ -24,6 +24,7 @@
 					 HorizontalAlignment="Stretch"
 				 
 					 />
+			
 			
 		</StackPanel>
 	</Grid>
