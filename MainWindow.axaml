@@ -64,8 +64,20 @@
 					VerticalContentAlignment="Center"
 					Click="seeAsset_Clicked"
 					/>
-
-
+					<Button
+					Content="Add Game library"
+                    Background="#1E1E1E"
+                    Foreground="White"
+                    FontSize="14"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="1"
+                    Width="168"
+                    Height="45"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					Click="Addlibrary"
+					/>
+				
 			</StackPanel>
 			<ContentControl Name="Result" />
 

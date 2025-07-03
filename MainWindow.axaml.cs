@@ -1,3 +1,4 @@
+#pragma warning disable
 using Avalonia.Controls;
 using System.Collections.Generic;
 using System;
@@ -8,12 +9,26 @@ using System.Drawing;
 using Avalonia.Media;
 using Avalonia;
 using System.Linq;
+using System.Threading.Tasks;
+
+///Todo:
+///Add a stable save for Game asset library path
+///Add adding new Game assets to that library (Add asset button fuc)
+///ask if new game asset should be moved to game asset library (new windows for it)
+///search options like search only for .mp3, 3d obj or only asset store recommandation
+///import to your game project
+///support for finding and adding Freesound and OpenGameArt assets
+///better UI
+///publish first version WHOOOHOOO
+///send email to asset store owners for allowance to search their asset store
+
 namespace AssetFinder
 {
     public partial class MainWindow : Window
     {
         private List<Asset> Assets = new List<Asset>();
         public List<Asset> SearchResult = new List<Asset>();
+        Settings settings;
 
         private double _itemSize = 150;
         public double ItemSize
@@ -34,6 +49,8 @@ namespace AssetFinder
         {
             InitializeComponent();
 
+            LoadSettings();
+
             Panel.LayoutUpdated += (_, __) =>
             {
                 var width = Panel.Bounds.Width;
@@ -41,11 +58,12 @@ namespace AssetFinder
                 double size = width / count - 10;
                 ItemSize = Math.Clamp(size, 77, 200);
             };
+
+            
         }
 
-        private async void AddAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private async void AddAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)// Add button clicked
         {
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
             var dialog = new OpenFileDialog
             {
                 Title = "Select your Assets",
@@ -56,7 +74,6 @@ namespace AssetFinder
                         new FileDialogFilter { Name = "Alle Dateien", Extensions = { "*" } }
                     }
             };
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
 
             string[]? result = await dialog.ShowAsync(this);
 
@@ -67,33 +84,16 @@ namespace AssetFinder
             }
         }
 
-        private async void seeAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private async void seeAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) // Se button clicked
         {
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
             var dialog = new OpenFolderDialog
             {
                 Title = "Select your Assets",
             };
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
-
             string? resultString = await dialog.ShowAsync(this);
-
-            if (resultString != null && resultString.Length > 0)
-            {
-                string filePath = resultString;
-                string[] result = Directory.GetFiles(filePath, "*", SearchOption.AllDirectories);
-                foreach (var item in result)
-                {
-                    Asset asset = new Asset();
-                    asset.File_Name = Path.GetFileName(item.ToString());
-                    asset.File_Path = Path.GetFullPath(item.ToString());
-
-                    Assets.Add(asset);
-                }
-            }
         }
 
-        private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e)
+        private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e) //search bar
         {
             if (e.Key == Key.Enter && sender != null)
             {
@@ -149,6 +149,70 @@ namespace AssetFinder
             MainPanel.IsVisible = !MainPanel.IsVisible;
             SearchPanel.IsVisible = !SearchPanel.IsVisible;
             SearchButtons.IsVisible = !SearchButtons.IsVisible;
+        }
+
+        static readonly string SettingsPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "SlAsset",
+            "settings.json"
+        );
+
+        private async void Addlibrary(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Select your Assets",
+            };
+            string? resultString = await dialog.ShowAsync(this);
+
+            if (resultString != null && resultString.Length > 0)
+            {
+                settings.AssetLib_Path = resultString;
+                SaveSettings();
+                WriteAsset(resultString);
+            }
+        }
+
+        private void WriteAsset(string resultString) // get assets from asset path
+        {
+            string filePath = resultString;
+            settings.AssetLib_Path = filePath;
+            string[] result = Directory.GetFiles(filePath, "*", SearchOption.AllDirectories);
+            foreach (var item in result)
+            {
+                Asset asset = new Asset();
+                asset.File_Name = Path.GetFileName(item.ToString());
+                asset.File_Path = Path.GetFullPath(item.ToString());
+
+                Assets.Add(asset);
+            }
+        }
+
+        private void LoadSettings()
+        {
+            if (File.Exists(SettingsPath))
+            {
+                string json = File.ReadAllText(SettingsPath);
+                settings = JsonConvert.DeserializeObject<Settings>(json) ?? new Settings();
+                if(settings.AssetLib_Path!= null && Path.Exists(settings.AssetLib_Path))
+                    WriteAsset(settings.AssetLib_Path);
+            }
+            else
+            {
+                settings = new Settings();
+                SaveSettings();
+            }
+        }
+
+        private void SaveSettings()
+        {
+            if (!Directory.Exists(Path.GetDirectoryName(SettingsPath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(SettingsPath)!);
+            }
+
+            string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            File.WriteAllText(SettingsPath, json);
         }
     }
 }
