@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 ///Todo:
-///Add a stable save for Game asset library path
+///Add a stable save for Game asset library path [done]
 ///Add adding new Game assets to that library (Add asset button fuc)
 ///ask if new game asset should be moved to game asset library (new windows for it)
 ///search options like search only for .mp3, 3d obj or only asset store recommandation
@@ -68,19 +68,17 @@ namespace AssetFinder
             {
                 Title = "Select your Assets",
                 AllowMultiple = true,
-                Filters = new List<FileDialogFilter>
-                    {
-                        new FileDialogFilter { Name = "Textdateien", Extensions = { "txt" } },
-                        new FileDialogFilter { Name = "Alle Dateien", Extensions = { "*" } }
-                    }
             };
 
             string[]? result = await dialog.ShowAsync(this);
-
+            
             if (result != null && result.Length > 0)
             {
-                string filePath = result[0];
-                Console.WriteLine("Ausgewählte Datei: " + filePath);
+                foreach (var item in result)
+                {
+                    string des = Path.Combine(settings.AssetLib_Path, Path.GetFileName(item));
+                    File.Move(item, des);
+                }
             }
         }
 
