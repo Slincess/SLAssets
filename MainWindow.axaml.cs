@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 ///Todo:
 ///Add a stable save for Game asset library path [done]
-///Add adding new Game assets to that library (Add asset button fuc)
+///Add adding new Game assets to that library (Add asset button fuc) [done]
 ///ask if new game asset should be moved to game asset library (new windows for it)
 ///search options like search only for .mp3, 3d obj or only asset store recommandation
 ///import to your game project
