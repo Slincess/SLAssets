@@ -126,8 +126,7 @@ namespace AssetFinder
                 string Search = textBox.Text;
                 Search.ToLower();
 
-                SearchOptions searchOption;
-                searchOption = (SearchOptions)TypSelect.SelectedIndex;
+                SearchOptions searchOption = GetSearchOptions();
 
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
@@ -175,6 +174,14 @@ namespace AssetFinder
                     }
                 }
             }
+        }
+
+        //Get Search Option and set the otherone to the this one
+        private SearchOptions GetSearchOptions()
+        {
+            if (MainPanel.IsVisible == true) { TypSelectSearch.SelectedIndex = TypSelect.SelectedIndex; return (SearchOptions)TypSelect.SelectedIndex; }
+            else if (SearchPanel.IsVisible == true) { TypSelect.SelectedIndex = TypSelectSearch.SelectedIndex; return (SearchOptions)TypSelectSearch.SelectedIndex; }
+            return SearchOptions.all;
         }
 
         private void UpdateButtonSizes()

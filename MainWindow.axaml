@@ -37,12 +37,13 @@
 						 Name="SearchBar"
 					 
 					 />
-				<ComboBox Name="TypSelect" SelectedIndex="0" MaxDropDownHeight="150">
+				<ComboBox Name="TypSelect" SelectedIndex="0" MaxDropDownHeight="150" Width="100">
 					<ComboBoxItem>all</ComboBoxItem>
 					<ComboBoxItem>only sfx</ComboBoxItem>
 					<ComboBoxItem>only models</ComboBoxItem>
 					<ComboBoxItem>only game engine asset</ComboBoxItem>
 					<ComboBoxItem>only images/textures</ComboBoxItem>
+					<ComboBoxItem>search through internet</ComboBoxItem>
 				</ComboBox>
 			</StackPanel>
 
@@ -155,6 +156,15 @@
                      HorizontalAlignment="Stretch"
 					 KeyDown="UserSearching"
 					 />
+
+			<ComboBox Name="TypSelectSearch" SelectedIndex="0" MaxDropDownHeight="150" Width="100" Margin="1315,0,0,0">
+				<ComboBoxItem>all</ComboBoxItem>
+				<ComboBoxItem>only sfx</ComboBoxItem>
+				<ComboBoxItem>only models</ComboBoxItem>
+				<ComboBoxItem>only game engine asset</ComboBoxItem>
+				<ComboBoxItem>only images/textures</ComboBoxItem>
+				<ComboBoxItem>search through internet</ComboBoxItem>
+			</ComboBox>
 
 			<!-- Unten: Scrollbarer Buttonbereich -->
 			<ScrollViewer Grid.Row="1"
