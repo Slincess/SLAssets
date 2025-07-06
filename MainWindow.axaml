@@ -37,7 +37,7 @@
 						 Name="SearchBar"
 					 
 					 />
-				<ComboBox SelectedIndex="3" MaxDropDownHeight="150">
+				<ComboBox Name="TypSelect" SelectedIndex="0" MaxDropDownHeight="150">
 					<ComboBoxItem>all</ComboBoxItem>
 					<ComboBoxItem>only sfx</ComboBoxItem>
 					<ComboBoxItem>only models</ComboBoxItem>
@@ -86,6 +86,19 @@
 				HorizontalContentAlignment="Center"
 				VerticalContentAlignment="Center"
 				Click="Addlibrary"
+					/>
+				<Button
+				Content="refresh"
+				Background="#1E1E1E"
+				Foreground="White"
+				FontSize="14"
+				BorderBrush="#2A2A2A"
+				BorderThickness="1"
+				Width="65"
+				Height="45"
+				HorizontalContentAlignment="Center"
+				VerticalContentAlignment="Center"
+				Click="RefreshClicked"
 					/>
 
 			</StackPanel>

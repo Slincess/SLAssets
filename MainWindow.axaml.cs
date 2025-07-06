@@ -30,6 +30,7 @@ namespace AssetFinder
         public List<Asset> SearchResult = new List<Asset>();
         Settings settings;
 
+
         private double _itemSize = 150;
         public double ItemSize
         {
@@ -108,6 +109,13 @@ namespace AssetFinder
                 WriteAsset(resultString);
             }
         }
+
+
+        private void RefreshClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            WriteAsset(settings.AssetLib_Path);
+        }
+
         #endregion
 
         private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e) //search bar
@@ -117,20 +125,40 @@ namespace AssetFinder
                 var textBox = sender as TextBox;
                 string Search = textBox.Text;
                 Search.ToLower();
+
+                SearchOptions searchOption;
+                searchOption = (SearchOptions)TypSelect.SelectedIndex;
+
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
                     var searchWords = Search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
+                    List<Asset> MatchingName = new List<Asset>();
                     SearchResult.Clear();
+
+                    //first find matching names to the search
                     var found = settings.AlreadyKnowAssets.FindAll(asset =>
                     {
                         string fileName = asset.File_Name.ToLower();
 
                         return searchWords.All(word => fileName.Contains(word));
                     });
-                    SearchResult.AddRange(found);
 
-                    if(MainPanel.IsVisible == true) ToggleSearchPanel();
+
+                    //get the assets and filter it with searched option
+                    if (searchOption != SearchOptions.all)
+                    {
+                        var FoundType = found.FindAll(asset =>
+                        {
+                            var type = asset.File_Type;
+                            return searchOption.Equals(type);
+                        });
+                        SearchResult.AddRange(FoundType);
+                        //if search option isnt for all then filter the searchresult
+                    }
+                    else SearchResult.AddRange(found); //if not then just show the searchresult 
+
+
+                    if (MainPanel.IsVisible == true) ToggleSearchPanel();
 
                     Panel.Children.Clear();
                     foreach (var item in SearchResult)
@@ -184,6 +212,28 @@ namespace AssetFinder
                 Asset asset = new Asset();
                 asset.File_Name = Path.GetFileName(item.ToString());
                 asset.File_Path = Path.GetFullPath(item.ToString());
+                string type = Path.GetExtension(item.ToString().ToLower());
+                switch (type)
+                {
+                    case ".mp4":
+                        asset.File_Type = SearchOptions.only_sfx;
+                    break;
+                    case ".wav":
+                        asset.File_Type = SearchOptions.only_sfx;
+                        break;
+                    case ".fbx":
+                        asset.File_Type = SearchOptions.only_3d;
+                        break;
+                    case ".png":
+                        asset.File_Type = SearchOptions.only_images;
+                        break;
+                    case ".jpeg":
+                        asset.File_Type = SearchOptions.only_images;
+                        break;
+                    default:
+                        asset.File_Type = SearchOptions.all;
+                        break;
+                }
                 settings.AlreadyKnowAssets.Add(asset);
             }
             SaveSettings();

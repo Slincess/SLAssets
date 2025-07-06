@@ -11,5 +11,15 @@ namespace AssetFinder
     {
         public string? File_Name;
         public string? File_Path;
+        public SearchOptions? File_Type;
+    }
+
+    public enum SearchOptions
+    {
+        all,
+        only_sfx,
+        only_3d,
+        only_gameEngineAsset,
+        only_images
     }
 }

@@ -19,7 +19,7 @@ public partial class SearchResult : UserControl
         List.Children.Clear();
         foreach (var item in assets)
         {
-            List.Children.Add(new TextBlock { Text = $"{item.File_Name}" });
+            List.Children.Add(new TextBlock { Text = $"{item.File_Name} {item.File_Type}" });
         }
     }
 }
