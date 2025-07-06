@@ -11,7 +11,7 @@
 	<!-- Main Panel -->
 
 	<Grid>
-		<StackPanel IsVisible="True" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Spacing="20">
+		<StackPanel IsVisible="True" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Spacing="20">
 
 
 			<!-- Title -->
@@ -21,20 +21,30 @@
                        Foreground="White"
 					   Name="Title"/>
 
-			<!-- Search Bar -->
-			<TextBox Watermark="what do you need?"
-                     Background="#1E1E1E"
-                     Foreground="White"
-                     FontSize="14"
-                     BorderBrush="#2A2A2A"
-                     BorderThickness="1"
-                     Height="40"
-                     Padding="10"
-                     HorizontalAlignment="Stretch"
-					 KeyDown="UserSearching"
-					 Name="SearchBar"
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="70,0,0,0" >
+				<!-- Search Bar -->
+				<TextBox Watermark="what do you need?"
+						 Background="#1E1E1E"
+						 Foreground="White"
+						 FontSize="14"
+						 BorderBrush="#2A2A2A"
+						 BorderThickness="1"
+						 Height="40"
+						 Padding="10"
+						 Width="600"
+						 HorizontalAlignment="Stretch"
+						 KeyDown="UserSearching"
+						 Name="SearchBar"
 					 
 					 />
+				<ComboBox SelectedIndex="3" MaxDropDownHeight="150">
+					<ComboBoxItem>all</ComboBoxItem>
+					<ComboBoxItem>only sfx</ComboBoxItem>
+					<ComboBoxItem>only models</ComboBoxItem>
+					<ComboBoxItem>only game engine asset</ComboBoxItem>
+					<ComboBoxItem>only images/textures</ComboBoxItem>
+				</ComboBox>
+			</StackPanel>
 
 			<!-- Buttons -->
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
@@ -64,20 +74,20 @@
 					VerticalContentAlignment="Center"
 					Click="seeAsset_Clicked"
 					/>
-					<Button
-					Content="Add Game library"
-                    Background="#1E1E1E"
-                    Foreground="White"
-                    FontSize="14"
-                    BorderBrush="#2A2A2A"
-                    BorderThickness="1"
-                    Width="168"
-                    Height="45"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"
-					Click="Addlibrary"
+				<Button
+				Content="Add Game library"
+				Background="#1E1E1E"
+				Foreground="White"
+				FontSize="14"
+				BorderBrush="#2A2A2A"
+				BorderThickness="1"
+				Width="168"
+				Height="45"
+				HorizontalContentAlignment="Center"
+				VerticalContentAlignment="Center"
+				Click="Addlibrary"
 					/>
-				
+
 			</StackPanel>
 			<ContentControl Name="Result" />
 
@@ -147,7 +157,7 @@
 						   Margin="0,0,0,0"
 						   Width="1500"
 						   >
-						   
+
 					<!-- Buttons -->
 					<Button	MinWidth="100"
 							MaxWidth="200"
@@ -159,6 +169,6 @@
 			</ScrollViewer>
 		</Grid>
 
-		
+
 	</Grid>
 </Window>

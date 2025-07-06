@@ -26,7 +26,7 @@ namespace AssetFinder
 {
     public partial class MainWindow : Window
     {
-        private List<Asset> Assets = new List<Asset>();
+        //private List<Asset> Assets = new List<Asset>();
         public List<Asset> SearchResult = new List<Asset>();
         Settings settings;
 
@@ -61,8 +61,9 @@ namespace AssetFinder
 
             
         }
+        #region buttons
 
-        private async void AddAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)// Add button clicked
+        private async void AddAsset_Clicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)// Add Asset button clicked
         {
             var dialog = new OpenFileDialog
             {
@@ -91,6 +92,24 @@ namespace AssetFinder
             string? resultString = await dialog.ShowAsync(this);
         }
 
+
+        private async void Addlibrary(object? sender, Avalonia.Interactivity.RoutedEventArgs e) //for add library button
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Select your Assets",
+            };
+            string? resultString = await dialog.ShowAsync(this);
+
+            if (resultString != null && resultString.Length > 0)
+            {
+                settings.AssetLib_Path = resultString;
+                SaveSettings();
+                WriteAsset(resultString);
+            }
+        }
+        #endregion
+
         private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e) //search bar
         {
             if (e.Key == Key.Enter && sender != null)
@@ -103,7 +122,7 @@ namespace AssetFinder
                     var searchWords = Search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
                     SearchResult.Clear();
-                    var found = Assets.FindAll(asset =>
+                    var found = settings.AlreadyKnowAssets.FindAll(asset =>
                     {
                         string fileName = asset.File_Name.ToLower();
 
@@ -155,22 +174,6 @@ namespace AssetFinder
             "settings.json"
         );
 
-        private async void Addlibrary(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            var dialog = new OpenFolderDialog
-            {
-                Title = "Select your Assets",
-            };
-            string? resultString = await dialog.ShowAsync(this);
-
-            if (resultString != null && resultString.Length > 0)
-            {
-                settings.AssetLib_Path = resultString;
-                SaveSettings();
-                WriteAsset(resultString);
-            }
-        }
-
         private void WriteAsset(string resultString) // get assets from asset path
         {
             string filePath = resultString;
@@ -181,9 +184,9 @@ namespace AssetFinder
                 Asset asset = new Asset();
                 asset.File_Name = Path.GetFileName(item.ToString());
                 asset.File_Path = Path.GetFullPath(item.ToString());
-
-                Assets.Add(asset);
+                settings.AlreadyKnowAssets.Add(asset);
             }
+            SaveSettings();
         }
 
         private void LoadSettings()
@@ -192,8 +195,9 @@ namespace AssetFinder
             {
                 string json = File.ReadAllText(SettingsPath);
                 settings = JsonConvert.DeserializeObject<Settings>(json) ?? new Settings();
-                if(settings.AssetLib_Path!= null && Path.Exists(settings.AssetLib_Path))
-                    WriteAsset(settings.AssetLib_Path);
+
+                if (settings.AlreadyKnowAssets == null)
+                    settings.AlreadyKnowAssets = new List<Asset>();
             }
             else
             {

@@ -10,6 +10,16 @@ namespace AssetFinder
     public class Settings
     {
         public string? AssetLib_Path;
-        public Asset[]? AlreadyKnowAssets;
+        public List<Asset> AlreadyKnowAssets = new List<Asset>();
     }
+    /*
+    public enum SearchOptions
+    {
+        all,
+        only_sfx,
+        only_3d,
+        only_gameEngineAsset,
+        only_images
+    }
+    */
 }
