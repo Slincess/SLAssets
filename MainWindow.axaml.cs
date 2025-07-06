@@ -10,12 +10,13 @@ using Avalonia.Media;
 using Avalonia;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Layout;
 
 ///Todo:
 ///Add a stable save for Game asset library path [done]
 ///Add adding new Game assets to that library (Add asset button fuc) [done]
 ///ask if new game asset should be moved to game asset library (new windows for it)
-///search options like search only for .mp3, 3d obj or only asset store recommandation
+///search options like search only for .mp3, 3d obj or only asset store recommandation [done]
 ///import to your game project
 ///support for finding and adding Freesound and OpenGameArt assets
 ///better UI
@@ -162,15 +163,63 @@ namespace AssetFinder
                     Panel.Children.Clear();
                     foreach (var item in SearchResult)
                     {
-                        Panel.Children.Add(new Button
+                        var container = new Border
                         {
                             Background = new SolidColorBrush(Avalonia.Media.Color.Parse("#3f3f3f")),
-                            Foreground = Brushes.White,
-                            Content = $"{item.File_Name}",
                             Width = ItemSize,
                             Height = ItemSize,
-                            Margin = new Thickness(10)
-                        });
+                            Margin = new Thickness(10),
+                            Child = new Grid
+                            {
+                                RowDefinitions = new RowDefinitions("Auto,*"),
+                                Children =
+                                {
+                                    
+                                    new TextBlock
+                                    {
+                                        Text = $"{item.File_Name}",
+                                        TextWrapping = TextWrapping.Wrap,
+                                        TextAlignment = TextAlignment.Center,
+                                        VerticalAlignment = VerticalAlignment.Top,
+                                        HorizontalAlignment = HorizontalAlignment.Center
+                                    },
+                                    new StackPanel
+                                    {
+                                        Orientation = Orientation.Horizontal,
+                                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                                        VerticalAlignment = VerticalAlignment.Bottom,
+                                        Children =
+                                        {
+                                            new Button
+                                            {
+                                                Content = new TextBlock
+                                                {
+                                                        Text = "Open in File explorer",
+                                                        TextWrapping = TextWrapping.Wrap
+                                                },
+                                                Width = (_itemSize - 40) / 2,
+                                                Margin = new Thickness(5),
+                                                HorizontalAlignment = HorizontalAlignment.Left
+                                            },
+                                            new Button
+                                            {
+                                                Content = new TextBlock
+                                                {
+                                                    Text = "Import into your project",
+                                                    TextWrapping = TextWrapping.Wrap
+                                                },
+                                                Width = (_itemSize - 40) / 2,
+                                                Margin = new Thickness(5),
+                                                HorizontalAlignment = HorizontalAlignment.Right
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        };
+
+                        Panel.Children.Add(container);
                     }
                 }
             }
