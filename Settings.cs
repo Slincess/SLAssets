@@ -10,6 +10,7 @@ namespace AssetFinder
     public class Settings
     {
         public string? AssetLib_Path;
+        public string? lastAssetFolder;
         public List<Asset> AlreadyKnowAssets = new List<Asset>();
     } 
 }

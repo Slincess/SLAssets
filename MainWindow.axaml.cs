@@ -163,6 +163,65 @@ namespace AssetFinder
                     Panel.Children.Clear();
                     foreach (var item in SearchResult)
                     {
+                        var title = new TextBlock
+                        {
+                            Text = $"{item.File_Name}",
+                            TextWrapping = TextWrapping.Wrap,
+                            TextAlignment = TextAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            HorizontalAlignment = HorizontalAlignment.Center
+                        };
+                        Grid.SetRow(title, 0);
+
+                        var buttonGrid = new Grid
+                        {
+                            ColumnDefinitions = new ColumnDefinitions("*,*"),
+                            HorizontalAlignment = HorizontalAlignment.Stretch,
+                            VerticalAlignment = VerticalAlignment.Bottom
+                        };
+                        Grid.SetRow(buttonGrid, 1);
+
+                        var openButton = new Button
+                        {
+                            Content = new TextBlock
+                            {
+                                Text = "Open in File explorer",
+                                TextWrapping = TextWrapping.Wrap
+                            },
+                            Margin = new Thickness(5),
+                            HorizontalAlignment = HorizontalAlignment.Stretch,
+                            VerticalAlignment = VerticalAlignment.Bottom
+                        };
+                        Grid.SetColumn(openButton, 0);
+
+                        openButton.Click += async (sender, e) =>
+                        {
+                            string fullypath = Path.GetFullPath(item.File_Path);
+                            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", fullypath));
+                        };
+
+                        var importButton = new Button
+                        {
+                            Content = new TextBlock
+                            {
+                                Text = "Import into your project",
+                                TextWrapping = TextWrapping.Wrap
+                            },
+                            Margin = new Thickness(5),
+                            HorizontalAlignment = HorizontalAlignment.Stretch,
+                            VerticalAlignment = VerticalAlignment.Bottom
+                        };
+                        Grid.SetColumn(importButton, 1);
+
+                        importButton.Click += (sender, e) =>
+                        {
+                            Console.WriteLine($"Importing {item.File_Name}");
+                            ImportAsset(item);
+                        };
+
+                        buttonGrid.Children.Add(openButton);
+                        buttonGrid.Children.Add(importButton);
+
                         var container = new Border
                         {
                             Background = new SolidColorBrush(Avalonia.Media.Color.Parse("#3f3f3f")),
@@ -174,47 +233,8 @@ namespace AssetFinder
                                 RowDefinitions = new RowDefinitions("Auto,*"),
                                 Children =
                                 {
-                                    
-                                    new TextBlock
-                                    {
-                                        Text = $"{item.File_Name}",
-                                        TextWrapping = TextWrapping.Wrap,
-                                        TextAlignment = TextAlignment.Center,
-                                        VerticalAlignment = VerticalAlignment.Top,
-                                        HorizontalAlignment = HorizontalAlignment.Center
-                                    },
-                                    new StackPanel
-                                    {
-                                        Orientation = Orientation.Horizontal,
-                                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                                        VerticalAlignment = VerticalAlignment.Bottom,
-                                        Children =
-                                        {
-                                            new Button
-                                            {
-                                                Content = new TextBlock
-                                                {
-                                                        Text = "Open in File explorer",
-                                                        TextWrapping = TextWrapping.Wrap
-                                                },
-                                                Width = (_itemSize - 40) / 2,
-                                                Margin = new Thickness(5),
-                                                HorizontalAlignment = HorizontalAlignment.Left
-                                            },
-                                            new Button
-                                            {
-                                                Content = new TextBlock
-                                                {
-                                                    Text = "Import into your project",
-                                                    TextWrapping = TextWrapping.Wrap
-                                                },
-                                                Width = (_itemSize - 40) / 2,
-                                                Margin = new Thickness(5),
-                                                HorizontalAlignment = HorizontalAlignment.Right
-                                                
-                                            }
-                                        }
-                                    }
+                                    title,
+                                    buttonGrid
                                 }
                             }
                         };
@@ -224,6 +244,23 @@ namespace AssetFinder
                 }
             }
         }
+
+        private async void ImportAsset(Asset item)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Select your asset folder",
+            };
+            string? resultString = await dialog.ShowAsync(this);
+
+            string fullyresult = Path.GetFullPath(resultString);
+            
+            string des = Path.Combine(fullyresult, Path.GetFileName(item.File_Path));
+            File.Copy(item.File_Path, des, overwrite: true);
+
+        }
+
+        
 
         //Get Search Option and set the otherone to the this one
         private SearchOptions GetSearchOptions()
