@@ -11,6 +11,8 @@ using Avalonia;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Layout;
+using System.Reflection;
+using Avalonia.Media.Imaging;
 
 ///Todo:
 ///Add a stable save for Game asset library path [done]
@@ -31,6 +33,9 @@ namespace AssetFinder
         public List<Asset> SearchResult = new List<Asset>();
         Settings settings;
 
+        public Bitmap? sfxImage;
+
+        Dictionary<int, SearchOptions> icons = new();
 
         private double _itemSize = 150;
         public double ItemSize
@@ -61,6 +66,7 @@ namespace AssetFinder
                 ItemSize = Math.Clamp(size, 77, 200);
             };
 
+            
             
         }
         #region buttons
@@ -117,7 +123,6 @@ namespace AssetFinder
             WriteAsset(settings.AssetLib_Path);
         }
 
-        #endregion
 
         private void UserSearching(object? sender, Avalonia.Input.KeyEventArgs e) //search bar
         {
@@ -161,7 +166,7 @@ namespace AssetFinder
                     if (MainPanel.IsVisible == true) ToggleSearchPanel();
 
                     Panel.Children.Clear();
-                    foreach (var item in SearchResult)
+                    foreach (var item in SearchResult) //adding buttons for import and open for every found asset
                     {
                         var title = new TextBlock
                         {
@@ -171,8 +176,14 @@ namespace AssetFinder
                             VerticalAlignment = VerticalAlignment.Top,
                             HorizontalAlignment = HorizontalAlignment.Center
                         };
-                        Grid.SetRow(title, 0);
 
+                        var icon = new Image
+                        {
+                            Source = GetIcon(item.File_Type.Value)
+                        };
+
+                        Grid.SetRow(title, 0);
+                        Grid.SetRow(icon, 0);
                         var buttonGrid = new Grid
                         {
                             ColumnDefinitions = new ColumnDefinitions("*,*"),
@@ -252,15 +263,18 @@ namespace AssetFinder
                 Title = "Select your asset folder",
             };
             string? resultString = await dialog.ShowAsync(this);
+            if (resultString == null) return;
 
             string fullyresult = Path.GetFullPath(resultString);
-            
+
             string des = Path.Combine(fullyresult, Path.GetFileName(item.File_Path));
             File.Copy(item.File_Path, des, overwrite: true);
 
         }
 
-        
+        #endregion
+
+
 
         //Get Search Option and set the otherone to the this one
         private SearchOptions GetSearchOptions()
@@ -332,6 +346,37 @@ namespace AssetFinder
             SaveSettings();
         }
 
+        private void GetAppAsset()//gets the needed assets for the app
+        {
+            string assetsfolder = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\Assets";
+            string sfxiconPath = Path.Combine(assetsfolder, "sfxicon.png");
+            sfxImage = new Bitmap(sfxiconPath);
+        }
+
+        private Bitmap GetIcon(SearchOptions searchId)
+        {
+            switch (searchId)
+            {
+                case SearchOptions.all:
+                    break;
+                case SearchOptions.only_sfx:
+                    return sfxImage;
+                    break;
+                case SearchOptions.only_3d:
+                    return null;
+                    break;
+                case SearchOptions.only_gameEngineAsset:
+                    return null;
+                    break;
+                case SearchOptions.only_images:
+                    return null;
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
+
         private void LoadSettings()
         {
             if (File.Exists(SettingsPath))
@@ -347,6 +392,7 @@ namespace AssetFinder
                 settings = new Settings();
                 SaveSettings();
             }
+            GetAppAsset();
         }
 
         private void SaveSettings()

@@ -11,8 +11,10 @@
 	<!-- Main Panel -->
 
 	<Grid>
-		<StackPanel IsVisible="False" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Spacing="20">
 
+		
+		
+		<StackPanel IsVisible="False" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Spacing="20">
 
 			<!-- Title -->
 			<TextBlock Text="SL Assets"
@@ -166,6 +168,7 @@
 				<ComboBoxItem>search through internet</ComboBoxItem>
 			</ComboBox>
 
+			<TextBlock Name="debugText" Text="aaaaa" Margin="100,0,0,0"/>
 			<!-- Unten: Scrollbarer Buttonbereich -->
 			<ScrollViewer Grid.Row="1"
 						  Margin="0,60,350,0"
