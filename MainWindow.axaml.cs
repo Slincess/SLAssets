@@ -34,6 +34,9 @@ namespace AssetFinder
         Settings settings;
 
         public Bitmap? sfxImage;
+        public Bitmap? textureImage;
+        public Bitmap? modelImage;
+        public Bitmap? GameAssetIMage;
 
         Dictionary<int, SearchOptions> icons = new();
 
@@ -179,18 +182,23 @@ namespace AssetFinder
 
                         var icon = new Image
                         {
-                            Source = GetIcon(item.File_Type.Value)
+                            Source = GetIcon(item.File_Type.Value),
+                            VerticalAlignment = VerticalAlignment.Top,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            MaxHeight = _itemSize / 2,
+                            MaxWidth = _itemSize / 2,
+                            
                         };
 
                         Grid.SetRow(title, 0);
-                        Grid.SetRow(icon, 0);
+                        Grid.SetRow(icon, 1);
                         var buttonGrid = new Grid
                         {
                             ColumnDefinitions = new ColumnDefinitions("*,*"),
                             HorizontalAlignment = HorizontalAlignment.Stretch,
                             VerticalAlignment = VerticalAlignment.Bottom
                         };
-                        Grid.SetRow(buttonGrid, 1);
+                        Grid.SetRow(buttonGrid, 2);
 
                         var openButton = new Button
                         {
@@ -222,7 +230,7 @@ namespace AssetFinder
                             HorizontalAlignment = HorizontalAlignment.Stretch,
                             VerticalAlignment = VerticalAlignment.Bottom
                         };
-                        Grid.SetColumn(importButton, 1);
+                        Grid.SetColumn(importButton, 2);
 
                         importButton.Click += (sender, e) =>
                         {
@@ -245,7 +253,8 @@ namespace AssetFinder
                                 Children =
                                 {
                                     title,
-                                    buttonGrid
+                                    buttonGrid,
+                                    icon
                                 }
                             }
                         };
@@ -351,6 +360,10 @@ namespace AssetFinder
             string assetsfolder = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\Assets";
             string sfxiconPath = Path.Combine(assetsfolder, "sfxicon.png");
             sfxImage = new Bitmap(sfxiconPath);
+            string textureIconPath = Path.Combine(assetsfolder, "textureicon.png");
+            textureImage = new Bitmap(textureIconPath);
+            string modelIconPath = Path.Combine(assetsfolder, "modelicon.png");
+            modelImage = new Bitmap(modelIconPath);
         }
 
         private Bitmap GetIcon(SearchOptions searchId)
@@ -363,6 +376,7 @@ namespace AssetFinder
                     return sfxImage;
                     break;
                 case SearchOptions.only_3d:
+                    return modelImage;
                     return null;
                     break;
                 case SearchOptions.only_gameEngineAsset:
@@ -370,6 +384,7 @@ namespace AssetFinder
                     break;
                 case SearchOptions.only_images:
                     return null;
+                    return textureImage;
                     break;
                 default:
                     break;
