@@ -13,7 +13,18 @@ namespace AssetFinder
     {
         public string? AssetLib_Path;
         public string? lastAssetFolder;
-        public List<Asset> AlreadyKnowAssets = new List<Asset>();
+
+
+        /// <summary>
+        /// [0] = sfx|[1] = model|[2] = engine|[3] = images
+        /// </summary>
+        public List<List<Asset>> AlreadyKnowAssets = new List<List<Asset>>()
+        {
+         new List<Asset>(),
+         new List<Asset>(),
+         new List<Asset>(),
+         new List<Asset>()
+        };
 
 
         static readonly string SettingsPath = Path.Combine(
@@ -30,7 +41,7 @@ namespace AssetFinder
                 Settings settings = JsonConvert.DeserializeObject<Settings>(json) ?? new Settings();
 
                 if (settings.AlreadyKnowAssets == null)
-                    settings.AlreadyKnowAssets = new List<Asset>();
+                    settings.AlreadyKnowAssets = new List<List<Asset>>();
                 return settings;
             }
             else
@@ -42,7 +53,7 @@ namespace AssetFinder
             //GetAppAsset();
         }
 
-        private static Settings SaveSettings(Settings settings)
+        public static Settings SaveSettings(Settings settings)
         {
             if (!Directory.Exists(Path.GetDirectoryName(SettingsPath)))
             {

@@ -14,7 +14,7 @@
 
 		
 		
-		<StackPanel IsVisible="False" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Spacing="20">
+		<StackPanel IsVisible="True" Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Spacing="20">
 
 			<!-- Title -->
 			<TextBlock Text="SL Assets"
@@ -144,7 +144,7 @@
 
 		<!-- Search Panel -->
 
-		<Grid Name="SearchPanel" IsVisible="True" Margin="0,90,0,0"  RowDefinitions="Auto,*">
+		<Grid Name="SearchPanel" IsVisible="False" Margin="0,90,0,0"  RowDefinitions="Auto,*">
 			<!-- Oben: Suchfeld -->
 			<TextBox Watermark="what do you need?"
                      Background="#1E1E1E"

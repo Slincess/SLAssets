@@ -59,7 +59,8 @@ namespace AssetFinder
         {
             InitializeComponent();
 
-            LoadSettings();
+           settings = Settings.LoadSettings();
+            GetAppAsset();
 
             Panel.LayoutUpdated += (_, __) =>
             {
@@ -115,7 +116,7 @@ namespace AssetFinder
             if (resultString != null && resultString.Length > 0)
             {
                 settings.AssetLib_Path = resultString;
-                SaveSettings();
+                Settings.SaveSettings(settings);
                 WriteAsset(resultString);
             }
         }
@@ -139,12 +140,13 @@ namespace AssetFinder
 
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
+                    var allAssets = settings.AlreadyKnowAssets.SelectMany(list => list).ToList();
                     var searchWords = Search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                     List<Asset> MatchingName = new List<Asset>();
                     SearchResult.Clear();
 
                     //first find matching names to the search
-                    var found = settings.AlreadyKnowAssets.FindAll(asset =>
+                    var found = allAssets.FindAll(asset =>
                     {
                         string fileName = asset.File_Name.ToLower();
 
@@ -333,26 +335,31 @@ namespace AssetFinder
                 {
                     case ".mp4":
                         asset.File_Type = SearchOptions.only_sfx;
+                        settings.AlreadyKnowAssets[0].Add(asset);
                     break;
                     case ".wav":
                         asset.File_Type = SearchOptions.only_sfx;
+                        settings.AlreadyKnowAssets[0].Add(asset);
                         break;
                     case ".fbx":
                         asset.File_Type = SearchOptions.only_3d;
+                        settings.AlreadyKnowAssets[2].Add(asset);
                         break;
                     case ".png":
                         asset.File_Type = SearchOptions.only_images;
+                        settings.AlreadyKnowAssets[3].Add(asset);
                         break;
                     case ".jpeg":
                         asset.File_Type = SearchOptions.only_images;
+                        settings.AlreadyKnowAssets[3].Add(asset);
                         break;
                     default:
                         asset.File_Type = SearchOptions.all;
                         break;
                 }
-                settings.AlreadyKnowAssets.Add(asset);
+                //settings.AlreadyKnowAssets.Add(asset);
             }
-            SaveSettings();
+            Settings.SaveSettings(settings);
         }
 
         private void GetAppAsset()//gets the needed assets for the app
@@ -392,6 +399,7 @@ namespace AssetFinder
             return null;
         }
 
+        /*
         private void LoadSettings()
         {
             if (File.Exists(SettingsPath))
@@ -407,7 +415,6 @@ namespace AssetFinder
                 settings = new Settings();
                 SaveSettings();
             }
-            GetAppAsset();
         }
 
         private void SaveSettings()
@@ -420,5 +427,6 @@ namespace AssetFinder
             string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(SettingsPath, json);
         }
+        */
     }
 }

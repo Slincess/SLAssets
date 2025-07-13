@@ -8,7 +8,7 @@ namespace AssetFinder
 {
     public class SameFile
     {
-        public string FileName?;
+        public string? FileName;
         public List<Asset> files = new();
     }
 }

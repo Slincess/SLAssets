@@ -22,7 +22,7 @@ namespace AssetFinder
             settings = Settings.LoadSettings();
         }
 
-        
+        /*
 
         private void FindModelFiles_Pare() // finds files with same name but diffrent type and puts them together but only for 3d files (only fbx and blend and so on)
         {
@@ -36,15 +36,7 @@ namespace AssetFinder
 
             List<SameFile> sameFiles = new();
 
-            SameFile foundName = models.FindAll(asset =>
-            {
-                SameFile same = new();
-                asset.File_Name.Equals(same.FileName);
-                return same;
-            });
-
-
         }
-
+        */
     }
 }
