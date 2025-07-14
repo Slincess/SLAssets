@@ -34,14 +34,6 @@
       "RelativeMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|solutionrelative:settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|c:\\users\\kisac\\source\\repos\\slassets\\samefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|solutionrelative:samefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|c:\\users\\kisac\\source\\repos\\slassets\\fileorg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|solutionrelative:fileorg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|c:\\users\\kisac\\source\\repos\\slassets\\asset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA9CA573-23FD-402E-8C23-2A2D54557CE8}|AssetFinder.csproj|solutionrelative:asset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -53,32 +45,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 408,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SameFile.cs",
-              "DocumentMoniker": "C:\\Users\\kisac\\source\\repos\\SLAssets\\SameFile.cs",
-              "RelativeDocumentMoniker": "SameFile.cs",
-              "ToolTip": "C:\\Users\\kisac\\source\\repos\\SLAssets\\SameFile.cs",
-              "RelativeToolTip": "SameFile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T02:18:46.476Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "FileOrg.cs",
-              "DocumentMoniker": "C:\\Users\\kisac\\source\\repos\\SLAssets\\FileOrg.cs",
-              "RelativeDocumentMoniker": "FileOrg.cs",
-              "ToolTip": "C:\\Users\\kisac\\source\\repos\\SLAssets\\FileOrg.cs",
-              "RelativeToolTip": "FileOrg.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAhwCcAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T01:56:25.826Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 6,
@@ -89,8 +57,7 @@
               "RelativeToolTip": "..\\..\\..\\AppData\\Roaming\\SlAsset\\settings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOQXAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-06T21:52:07.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-06T21:52:07.309Z"
             },
             {
               "$type": "Document",
@@ -102,8 +69,7 @@
               "RelativeToolTip": "Settings.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAABgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T21:57:34.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-03T21:57:34.82Z"
             },
             {
               "$type": "Document",
@@ -115,8 +81,7 @@
               "RelativeToolTip": "AssetFinder.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-28T23:13:49.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T23:13:49.358Z"
             },
             {
               "$type": "Document",
@@ -127,8 +92,7 @@
               "ToolTip": "C:\\Users\\kisac\\source\\repos\\SLAssets\\App.axaml",
               "RelativeToolTip": "App.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-28T23:13:00.237Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T23:13:00.237Z"
             },
             {
               "$type": "Document",
@@ -140,8 +104,7 @@
               "RelativeToolTip": "App.axaml.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAkwAkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T23:07:30.663Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T23:07:30.663Z"
             },
             {
               "$type": "Document",
@@ -152,8 +115,7 @@
               "ToolTip": "C:\\Users\\kisac\\source\\repos\\SLAssets\\MainWindow.axaml",
               "RelativeToolTip": "MainWindow.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-27T00:11:52.262Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T00:11:52.262Z"
             },
             {
               "$type": "Document",
@@ -165,8 +127,7 @@
               "RelativeToolTip": "SearchResult.axaml.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwBUAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T01:52:49.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T01:52:49.802Z"
             },
             {
               "$type": "Document",
@@ -176,14 +137,14 @@
               "RelativeDocumentMoniker": "MainWindow.axaml.cs",
               "ToolTip": "C:\\Users\\kisac\\source\\repos\\SLAssets\\MainWindow.axaml.cs",
               "RelativeToolTip": "MainWindow.axaml.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAlwD4AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAGsAAAAAAAAAAIAywHgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-27T00:11:50.213Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Asset.cs",
               "DocumentMoniker": "C:\\Users\\kisac\\source\\repos\\SLAssets\\Asset.cs",
               "RelativeDocumentMoniker": "Asset.cs",
